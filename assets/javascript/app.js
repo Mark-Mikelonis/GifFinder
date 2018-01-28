@@ -13,21 +13,25 @@ $(document).ready(function() {
         }).done(function(response) {
             console.log("response: " + response);
 
-            loadImages(response);
+            for (var i = 0; i < response.data.length; i++) {
+            var newDiv = $("<div>");
+            var newP = $("<p>");
+            var newImg = $("<img>");
+            var still = response.data[i].images.fixed_height_still.url;
+            var moving = response.data[i].images.fixed_height.url;
+            newImg.attr("src", still);
+            newImg.addClass("images");
+            newImg.attr("data-still", still);
+            newImg.attr("data-moving", moving);
+            newImg.attr("data-state", "still");
+
+            $("#image-view").append(newImg);
+        }
             // console.log(response.data[0].images.fixed_height.url)
         });
     }
 
-    function loadImages(category) {
-        console.log("In loadImages");
-        for (var i = 0; i < category.data.length; i++) {
-            var newImg = $("<img>");
-            newImg.attr("src", category.data[i].images.fixed_height_still.url);
-            newImg.addClass("images");
-            $("#image-view").append(newImg);
-        }
-    }
-
+    
     function makeButtons() {
         console.log("In makeButtons");
         $("#cat-buttons").empty();
@@ -53,6 +57,7 @@ $(document).ready(function() {
     $("#add-category").on("click", function(element) {
         element.preventDefault();
         var category = $("#category-input").val().trim();
+        $("#category-input").empty();
         console.log(category);
         topics[topics.length] = category;
         console.log(topics.toString());
@@ -60,8 +65,15 @@ $(document).ready(function() {
     });
 
 
-    function swapImages(){
-        
-    }
-    $(document).on("click", ".images", swapImages);
+    $(document).on("click", ".images", function(){
+
+        if($(this).attr("data-state") === "still"){
+            $(this).attr("data-state", "moving");
+            $(this).attr("src", $(this).data().moving);
+        } else if ($(this).attr("data-state") === "moving") {
+            $(this).attr("data-state", "still");
+            $(this).attr("src", $(this).data().still);
+        }
+
+    });
 });
