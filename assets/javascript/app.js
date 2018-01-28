@@ -1,7 +1,8 @@
-var topics = ["dogs", "coffee", "music", "food", "computers"];
+
+var topics = ["dogs", "minions", "workaholics", "excited","archer", "family guy", "mind blown", "food", "animals being jerks", "adventure time", "reactions"];
 var queryPre = "https://api.giphy.com/v1/gifs/search?q=";
-var queryPro = "&api_key=iJSldEMsjyMIEQCw3DQrFls1iJDX92Tp";
-var lastIndex = 0;
+var queryPro = "&api_key=iJSldEMsjyMIEQCw3DQrFls1iJDX92Tp&limit=10";
+
 $(document).ready(function() {
     makeButtons();
 
@@ -14,8 +15,8 @@ $(document).ready(function() {
             console.log("response: " + response);
 
             for (var i = 0; i < response.data.length; i++) {
-            var newDiv = $("<div>");
-            var newP = $("<p>");
+            var newSpan = $("<span>");
+            newSpan.addClass("caption");
             var newImg = $("<img>");
             var still = response.data[i].images.fixed_height_still.url;
             var moving = response.data[i].images.fixed_height.url;
@@ -24,8 +25,15 @@ $(document).ready(function() {
             newImg.attr("data-still", still);
             newImg.attr("data-moving", moving);
             newImg.attr("data-state", "still");
+            
+            // newDiv.append("<h3>Rating: " + response.data[i].rating + "</h3>");
+            // newDiv.append(newImg);
 
+            $(newSpan).text("Rating: " + response.data[i].rating.toUpperCase());
             $("#image-view").append(newImg);
+           
+            $("#image-view").append(newSpan);
+            // $("#image-view").prepend("<h3>Rating: " + response.data[i].rating + "</h3>");
         }
             // console.log(response.data[0].images.fixed_height.url)
         });
@@ -38,17 +46,19 @@ $(document).ready(function() {
         for (var i = 0; i < topics.length; i++) {
             var newBtn = $("<button>");
             newBtn.text(topics[i]);
-            newBtn.addClass("buttons");
+            newBtn.addClass("buttons btn btn-primary");
             newBtn.attr("data-category", topics[i]);
             // console.log(topics.toString());
             // debugger;
             $(newBtn).on("click", function(element) {
                 element.preventDefault();
-                var category = newBtn.attr("data-category");
+                var category = $(this).attr("data-category");
                 console.log("category: " + category);
                 // console.log(topics.toString());
                 // debugger;
+                $("#image-view").empty();
                 getImages(category);
+                category = "";
             });
             $("#cat-buttons").append(newBtn);
             // lastIndex++;

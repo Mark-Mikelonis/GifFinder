@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 18px;
+  color: yellow;
+  line-height: 34px;
+  background-color: black;
+  
+}
+h1 {
+	text-align: center;
+	font-size: 35px;
+	line-height: 80px;
+	font-weight: bolder;
+}
+h2 {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+img { 
+    /*display: inline-block;*/
+}
+li {
+	text-align: center;
+}
+ul {
+	list-style-type: none; 
+}
+hr {
+	background-color: yellow;
+}
+.buttons{
+	
+	padding: 5px;
+	margin: 5px;
+}
+
+div.item {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    /*width: 120px;*/
+}
+img {
+/*    width: 100px;
+    height: 100px;*/
+    background-color: grey;
+}
+.caption {
+    display: block;
+}
