@@ -22,6 +22,7 @@ $(document).ready(function() {
             var moving = response.data[i].images.fixed_height.url;
             newImg.attr("src", still);
             newImg.addClass("images");
+            newImg.addClass("float-left");
             newImg.attr("data-still", still);
             newImg.attr("data-moving", moving);
             newImg.attr("data-state", "still");

@@ -49,7 +49,7 @@ div.item {
     /*width: 120px;*/
 }
 img {
-	
+	max-width: 400px;
     background-color: grey;
 }
 .caption {
