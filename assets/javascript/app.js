@@ -17,26 +17,25 @@ $(document).ready(function() {
             for (var i = 0; i < response.data.length; i++) {
             var newSpan = $("<span>");
             newSpan.addClass("caption");
+            newDiv = $("<div>");
+            newDiv.addClass("col-2");
             var newImg = $("<img>");
             var still = response.data[i].images.fixed_height_still.url;
             var moving = response.data[i].images.fixed_height.url;
             newImg.attr("src", still);
-            newImg.addClass("images");
-            newImg.addClass("float-left");
+            newImg.addClass("images float-left image-thumbnail");
             newImg.attr("data-still", still);
             newImg.attr("data-moving", moving);
             newImg.attr("data-state", "still");
+            newImg.attr("alt", response.data[i].title);
             
-            // newDiv.append("<h3>Rating: " + response.data[i].rating + "</h3>");
-            // newDiv.append(newImg);
-
             $(newSpan).text("Rating: " + response.data[i].rating.toUpperCase());
-            $("#image-view").append(newImg);
+            newDiv.append(newImg);
+            newDiv.append(newSpan);
+            $("#image-view").append(newDiv);
            
-            $("#image-view").append(newSpan);
-            // $("#image-view").prepend("<h3>Rating: " + response.data[i].rating + "</h3>");
+            // $("#image-view").append(newSpan);
         }
-            // console.log(response.data[0].images.fixed_height.url)
         });
     }
 
